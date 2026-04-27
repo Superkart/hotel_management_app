@@ -1,28 +1,6 @@
-# Maven
 target/
-!.mvn/wrapper/maven-wrapper.jar
-
-# Logs
-*.log
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# IDE files
 .vscode/
 .idea/
-*.iml
-
-# Java
 *.class
-
-# Environment variables
-.env
-
-# H2 database files (if file-based later)
-*.mv.db
-*.trace.db
-
-# Mac/Linux temp
-*~
+*.log
+.DS_Store

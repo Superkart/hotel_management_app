@@ -6,20 +6,14 @@ import java.time.LocalDate;
 @Entity
 public class Booking {
 
-    @Id
-    private Long bookingId;
-
+    @Id private Long bookingId;
     private LocalDate startDate;
-
     private LocalDate endDate;
-
     private double pricePerDay;
 
-    @ManyToOne
-    private Client client;
+    @ManyToOne private Client client;
 
-    @ManyToOne
-    private Room room;
+    @ManyToOne private Room room;
 
     public Booking() 
     {

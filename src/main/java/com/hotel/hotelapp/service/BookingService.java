@@ -18,6 +18,18 @@ public class BookingService {
 
     public Booking createBooking(Booking booking) 
     {
+        List<Booking> conflicts = repo.findOverlappingBookings
+        (
+            booking.getRoom().getRoomNumber(),
+            booking.getStartDate(),
+            booking.getEndDate()
+        );
+
+        if (!conflicts.isEmpty()) 
+            {
+                throw new RuntimeException("Room is already booked for this date range");
+            }
+            
         return repo.save(booking);
     }
 

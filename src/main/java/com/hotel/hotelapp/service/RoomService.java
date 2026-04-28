@@ -1,31 +1,55 @@
 package com.hotel.hotelapp.service;
 
 import org.springframework.stereotype.Service;
-import java.util.List;
 
-import com.hotel.hotelapp.entity.Hotel;
+import java.util.ArrayList;
+import java.util.List;
+import java.time.LocalDate;
+
+import com.hotel.hotelapp.entity.Booking;
 import com.hotel.hotelapp.entity.Room;
-import com.hotel.hotelapp.repository.HotelRepository;
+import com.hotel.hotelapp.repository.BookingRepository;
 import com.hotel.hotelapp.repository.RoomRepository; 
 
 @Service
 public class RoomService 
 {
 
-    private final RoomRepository repo;
+    private final RoomRepository roomRepo;
+    private final BookingRepository bookingRepo;
 
-    public RoomService(RoomRepository repo)
+    public RoomService(RoomRepository roomRepo, BookingRepository bookingRepo)
     {
-        this.repo = repo;
+        this.roomRepo = roomRepo;
+        this.bookingRepo = bookingRepo;
     }
+
 
     public Room createRoom(Room room)
     {
-        return repo.save(room);
+        return roomRepo.save(room);
     }
     public List<Room> getAllRooms()
     {
-        return repo.findAll();
+        return roomRepo.findAll();
+    }
+
+    public List<Room> getAllAvailableRooms(LocalDate startDate, LocalDate endDate)
+    {
+        List<Room> allRooms = roomRepo.findAll();
+        List<Room> availableRooms = new ArrayList<>();
+
+    for(Room room : allRooms)
+        {
+            List<Booking> conflictBooking = bookingRepo.findOverlappingBookings(room.getRoomNumber(), startDate, endDate);
+            
+            if(conflictBooking.isEmpty())
+                {
+                    availableRooms.add(room);
+                }
+
+        }
+        return availableRooms;
     }
 
 }

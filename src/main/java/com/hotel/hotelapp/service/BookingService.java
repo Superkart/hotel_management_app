@@ -18,12 +18,7 @@ public class BookingService {
 
     public Booking createBooking(Booking booking) 
     {
-        List<Booking> conflicts = repo.findOverlappingBookings
-        (
-            booking.getRoom().getRoomNumber(),
-            booking.getStartDate(),
-            booking.getEndDate()
-        );
+        List<Booking> conflicts = repo.findOverlappingBookings(booking.getRoom().getRoomNumber(), booking.getStartDate(), booking.getEndDate());
 
         if (!conflicts.isEmpty()) 
             {

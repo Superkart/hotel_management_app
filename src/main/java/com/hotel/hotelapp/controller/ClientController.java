@@ -1,15 +1,16 @@
 package com.hotel.hotelapp.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 import com.hotel.hotelapp.entity.Client;
 import com.hotel.hotelapp.service.ClientService;
 
-
 @RestController
 @RequestMapping("/clients")
-public class ClientController 
+public class ClientController
 {
     private final ClientService service;
 
@@ -28,5 +29,33 @@ public class ClientController
     public List<Client> getAllClients()
     {
         return service.getAllClients();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Client> login(@RequestParam String email)
+    {
+        Optional<Client> client = service.login(email);
+
+        if (client.isPresent())
+        {
+            return ResponseEntity.ok(client.get());
+        }
+
+        return ResponseEntity.status(401).build();
+    }
+
+    @DeleteMapping("/{email}")
+    public ResponseEntity<Void> deleteClient(@PathVariable String email)
+    {
+        service.deleteClient(email);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/city-query")
+    public List<Object[]> getClientsInCity1BookedInCity2(
+            @RequestParam String city1,
+            @RequestParam String city2)
+    {
+        return service.getClientsInCity1BookedInCity2(city1, city2);
     }
 }

@@ -17,9 +17,9 @@ public class Client
         name = "client_address",
         joinColumns = @JoinColumn(name = "client_email"),
         inverseJoinColumns = {
-            @JoinColumn(name = "streetName"),
-            @JoinColumn(name = "streetNumber"),
-            @JoinColumn(name = "city")
+            @JoinColumn(name = "street_name", referencedColumnName = "streetName"),
+            @JoinColumn(name = "street_number", referencedColumnName = "streetNumber"),
+            @JoinColumn(name = "city", referencedColumnName = "city")
         }
     )
     private List<Address> addresses;

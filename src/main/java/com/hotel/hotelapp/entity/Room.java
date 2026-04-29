@@ -17,10 +17,10 @@ public class Room
     private int renovationYear;
     private boolean elevatorAccess;
 
-    @ManyToOne  @JsonIgnore private Hotel hotel;
+    @ManyToOne private Hotel hotel;
 
     @OneToMany(mappedBy = "room")
-    private List<Booking> bookings;
+    @JsonIgnore private List<Booking> bookings;
 
     public Room()
     {

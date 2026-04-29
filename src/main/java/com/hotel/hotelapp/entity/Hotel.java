@@ -2,6 +2,7 @@ package com.hotel.hotelapp.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.util.List;
 
@@ -13,7 +14,9 @@ public class Hotel
 
     @Id private Long hotelId;
     private String name;
-    private String address;
+    
+
+    @ManyToOne private Address address;
     
     @OneToMany(mappedBy = "hotel")
     @JsonIgnore private List<Room> rooms;
@@ -35,10 +38,11 @@ public class Hotel
         return name;
     }
 
-    public String getAddress()
+    public Address getAddress() 
     {
         return address;
     }
+
 
     // Setters
 
@@ -52,11 +56,6 @@ public class Hotel
         this.name = name;
     }
 
-    public void setAddress(String address)
-    {
-        this.address = address;
-    }
-
     public List<Room> getRooms() 
     {
         return rooms;
@@ -66,6 +65,12 @@ public class Hotel
     {
         this.rooms = rooms;
     }
+
+    public void setAddress(Address address) 
+    {
+        this.address = address;
+    }
+
 }
 
 

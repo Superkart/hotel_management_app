@@ -1,27 +1,28 @@
 package com.hotel.hotelapp.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Id;
 
 @Entity
-@IdClass(ReviewID.class)
 public class Review 
 {
-    @Id private int reviewId;
+    @Id private Long reviewId;
+
+    @ManyToOne private Hotel hotel;
+
+    @ManyToOne private Client client;
+
     private String message;
     private int rating;
 
-    @Id @ManyToOne private Hotel hotel;
-    @ManyToOne private Client client;
 
     public Review()
     {
 
     }
 
-    public int getId()
+    public Long getReviewId()
     {
         return reviewId;
     }
@@ -46,7 +47,7 @@ public class Review
         return client;
     }
 
-    public void setId(int reviewId)
+    public void setReviewId(Long reviewId)
     {
         this.reviewId = reviewId;
     }

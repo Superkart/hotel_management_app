@@ -1,13 +1,17 @@
 package com.hotel.hotelapp.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Id;
 
 @Entity
-public class Review 
+public class Review
 {
-    @Id private Long reviewId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long reviewId;
 
     @ManyToOne private Hotel hotel;
 

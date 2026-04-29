@@ -3,6 +3,7 @@ package com.hotel.hotelapp.service;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import com.hotel.hotelapp.entity.Booking;
+import com.hotel.hotelapp.exception.BookingConflictException;
 import com.hotel.hotelapp.repository.BookingRepository;
 
 
@@ -22,7 +23,7 @@ public class BookingService {
 
         if (!conflicts.isEmpty()) 
             {
-                throw new RuntimeException("Room is already booked for this date range");
+                throw new BookingConflictException("Room is already booked for this date range");
             }
             
         return repo.save(booking);

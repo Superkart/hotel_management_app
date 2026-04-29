@@ -1,6 +1,8 @@
 package com.hotel.hotelapp.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -9,14 +11,17 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Hotel 
+public class Hotel
 {
 
-    @Id private Long hotelId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long hotelId;
     private String name;
     
 
-    @ManyToOne private Address address;
+    @ManyToOne(optional = true)
+    private Address address;
     
     @OneToMany(mappedBy = "hotel")
     @JsonIgnore private List<Room> rooms;

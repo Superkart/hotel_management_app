@@ -37,8 +37,9 @@ public interface BookingRepository extends JpaRepository<Booking, Long>
 
     @Query("""
             SELECT b.room.roomNumber, b.room.hotel.hotelId, COUNT(b)
-            FROM Booking b
-            GROUP BY b.room.roomNumber, b.room.hotelId
+            FROM Room r
+            LEFT JOIN Booking b ON b.room = r
+            GROUP BY r.roomNumber, r.hotel.hotelId
             """)
 
         List<Object[]> getRoomBookingCounts();

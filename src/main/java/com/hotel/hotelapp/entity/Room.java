@@ -3,7 +3,10 @@ package com.hotel.hotelapp.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Room 
@@ -14,8 +17,10 @@ public class Room
     private int renovationYear;
     private boolean elevatorAccess;
 
-    @ManyToOne private Hotel hotel;
+    @ManyToOne  @JsonIgnore private Hotel hotel;
 
+    @OneToMany(mappedBy = "room")
+    private List<Booking> bookings;
 
     public Room()
     {
@@ -24,6 +29,11 @@ public class Room
 
     
     // Getters
+
+    public List<Booking> getBookings() 
+    {
+        return bookings;
+    }
 
     public Long getRoomNumber() 
     {
@@ -74,6 +84,11 @@ public class Room
     public void setHotel(Hotel hotel) 
     {
         this.hotel = hotel;
+    }
+
+    public void setBookings(List<Booking> bookings) 
+    {
+        this.bookings = bookings;
     }
 
 }

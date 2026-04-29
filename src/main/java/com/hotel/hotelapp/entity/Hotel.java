@@ -2,6 +2,10 @@ package com.hotel.hotelapp.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Hotel 
@@ -11,6 +15,9 @@ public class Hotel
     private String name;
     private String address;
     
+    @OneToMany(mappedBy = "hotel")
+    @JsonIgnore private List<Room> rooms;
+
     public Hotel()
     {
 
@@ -48,6 +55,16 @@ public class Hotel
     public void setAddress(String address)
     {
         this.address = address;
+    }
+
+    public List<Room> getRooms() 
+    {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) 
+    {
+        this.rooms = rooms;
     }
 }
 

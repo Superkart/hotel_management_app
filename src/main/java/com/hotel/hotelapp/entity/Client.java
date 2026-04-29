@@ -3,6 +3,8 @@ package com.hotel.hotelapp.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Client 
 {
@@ -26,7 +28,7 @@ public class Client
     private List<CreditCard> creditCards;
 
     @OneToMany(mappedBy = "client")
-    private List<Booking> bookings;
+    @JsonIgnore private List<Booking> bookings;
 
     public Client()
     {

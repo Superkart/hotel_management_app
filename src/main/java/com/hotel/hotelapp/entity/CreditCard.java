@@ -1,5 +1,7 @@
 package com.hotel.hotelapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;;
@@ -9,7 +11,7 @@ public class CreditCard
 {
     @Id private String cardNumber;
     
-    @ManyToOne private Client client;
+    @ManyToOne @JsonIgnore private Client client;
     @ManyToOne private Address billingAddress;
 
     public CreditCard()

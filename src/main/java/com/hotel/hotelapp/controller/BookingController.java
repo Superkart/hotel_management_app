@@ -29,4 +29,10 @@ public class BookingController
     {
         return service.getAllBookings();
     }
+    
+    @GetMapping("/top-clients")
+    public List<Object[]> getTopClients(@RequestParam int k) 
+    {
+        return service.getTopClients(k);
+    }
 }

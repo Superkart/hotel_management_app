@@ -1,5 +1,6 @@
 package com.hotel.hotelapp.repository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,4 +24,14 @@ public interface BookingRepository extends JpaRepository<Booking, Long>
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate
     );
+
+    @Query("""
+            SELECT b.client.email, COUNT(b)
+            FROM Booking b
+            GROUP BY b.client.email
+            ORDER BY COUNT(b) DESC
+            """)
+            
+        List<Object[]> findTopClients(Pageable pageable);
+
 }

@@ -1,11 +1,12 @@
 package com.hotel.hotelapp.service;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import com.hotel.hotelapp.entity.Booking;
 import com.hotel.hotelapp.exception.BookingConflictException;
 import com.hotel.hotelapp.repository.BookingRepository;
-
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class BookingService {
@@ -32,5 +33,11 @@ public class BookingService {
     public List<Booking> getAllBookings() 
     {
         return repo.findAll();
+    }
+
+   public List<Object[]> getTopClients(int k) 
+   {
+        Pageable pageable = PageRequest.of(0, k);
+        return repo.findTopClients(pageable);
     }
 }

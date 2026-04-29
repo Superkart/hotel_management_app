@@ -40,4 +40,10 @@ public class BookingService {
         Pageable pageable = PageRequest.of(0, k);
         return repo.findTopClients(pageable);
     }
+
+    public List<Object[]> getRoomBookingCounts()
+    {
+        return repo.getRoomBookingCounts();
+    }
+
 }

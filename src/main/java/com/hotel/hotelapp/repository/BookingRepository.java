@@ -36,12 +36,11 @@ public interface BookingRepository extends JpaRepository<Booking, Long>
             """)
     List<Object[]> findTopClients(Pageable pageable);
 
-    @Query("""
-            SELECT r.roomNumber, r.hotel.hotelId, COUNT(b)
-            FROM Room r
-            LEFT JOIN r.bookings b
-            GROUP BY r.roomNumber, r.hotel.hotelId
-            """)
+    @Query(value = """
+            SELECT r.room_number, r.hotel_hotel_id,
+                   (SELECT COUNT(*) FROM booking b WHERE b.room_room_number = r.room_number) AS booking_count
+            FROM room r
+            """, nativeQuery = true)
     List<Object[]> getRoomBookingCounts();
 
     List<Booking> findByClientEmail(String email);

@@ -44,6 +44,14 @@ public class ClientController
         return ResponseEntity.status(401).build();
     }
 
+    @PutMapping("/{email}")
+    public ResponseEntity<Client> updateClient(@PathVariable String email, @RequestBody Client client)
+    {
+        Client updated = service.updateClient(email, client);
+        if (updated != null) return ResponseEntity.ok(updated);
+        return ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("/{email}")
     public ResponseEntity<Void> deleteClient(@PathVariable String email)
     {

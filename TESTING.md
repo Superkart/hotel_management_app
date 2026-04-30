@@ -94,7 +94,7 @@ Note the returned `hotelId` (e.g., `1`).
 ### Step 4 — Register a Manager
 **POST** `http://localhost:8080/managers`
 ```json
-{ "ssn": "111-22-3333", "name": "John Manager", "hotelId": 1 }
+{ "ssn": "111-22-3333", "name": "John Manager", "email": "john.manager@test.com" }
 ```
 
 **POST** `http://localhost:8080/managers/login?ssn=111-22-3333`
@@ -116,6 +116,12 @@ Note the returned `hotelId` (e.g., `1`).
 
 **POST** `http://localhost:8080/clients/login?email=alice@test.com`
 — Returns the client object, 401 if not found.
+
+**PUT** `http://localhost:8080/clients/alice@test.com`
+```json
+{ "name": "Alice Updated" }
+```
+Updates name and/or addresses. Email cannot be changed.
 
 ---
 
@@ -148,7 +154,7 @@ Must have a booking at that hotel first.
   "client": { "email": "alice@test.com" },
   "hotel": { "hotelId": 1 },
   "rating": 5,
-  "comment": "Great stay!"
+  "message": "Great stay!"
 }
 ```
 
